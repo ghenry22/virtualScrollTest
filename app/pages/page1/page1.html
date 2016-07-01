@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Page Uno</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding class="page1">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingText="Pull to refresh"
+      refreshingText="loading...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+  <ion-list [virtualScroll]="yearList">
+    <button ion-item *virtualItem="let item" (click)="itemTapped($event, item)">
+      <ion-avatar item-left>
+       <img *ngIf="item.coverSmall" [src]="item.coverSmall">
+      </ion-avatar>
+      <h2>{{item.name}}</h2>
+      <h5>{{item.description}}</h5>
+      <p>{{item.fromYear}} ({{item.toYear}})
+      <ion-icon primary name="star" *ngIf="item.isStarred > -1"></ion-icon>
+      <ion-icon primary name="cloud-done" *ngIf="item.isCached > -1"></ion-icon>
+      </p>
+    </button>
+  </ion-list>
+
+</ion-content>
